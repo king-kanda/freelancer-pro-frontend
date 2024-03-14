@@ -1,0 +1,43 @@
+.logo{
+    
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    background-color: green;
+
+    }
+
+
+.title{
+    h1{
+        font-size: 20px;
+        font-weight: bold;
+    }
+}
+
+.signupbtn{
+    span{
+        font-size: 20px;
+    }
+}
+
+.loginCard{
+    width: 40%;
+    border-radius: 5px;
+    background-color: white;
+    
+}
+
+.loginContainer{
+    background: url('https://images.pexels.com/photos/20013643/pexels-photo-20013643/free-photo-of-cold-snow-landscape-sunset.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+}
+
+.cardContainer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

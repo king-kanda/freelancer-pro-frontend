@@ -1,0 +1,49 @@
+# Node.js
+node_modules/
+
+# Dependency directories
+/typings/
+
+# Logs
+logs
+*.log
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Editor directories and files
+.idea/
+.vscode/
+
+# User-specific files
+*.suo
+*.user
+*.userosscache
+*.suo
+*.sln.docstates
+
+# Compiled files
+*.rdb
+*.pyc
+*.pyo
+*.pyc
+*.pyo
+
+# Module-specific files
+.pnpm
+.pnpm-debug.log
+
+# Debugging files
+debug.log
+
+# Environment files
+.env
+.next
+
+
+
+# Built output
+/dist/
+/build/
+/out/

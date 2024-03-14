@@ -1,0 +1,55 @@
+.onboardingContainer {
+    height: 95vh;
+}
+
+.Radio {
+    height: 270px;
+
+    h2 {
+        font-size: 20px;
+        font-weight: bold;
+
+    }
+
+}
+
+.card {
+    width: 50%;
+    margin: auto;
+}
+
+
+// account setup styles
+
+.avatar {
+    height: 150px;
+    width: 150px;
+    background-color: aliceblue;
+    border-radius: 50%;
+    z-index: 1;
+
+    img {
+        height: 150px;
+        width: 150px;
+        border: 2px solid rgb(255, 255, 255);
+        border-radius: 50%;
+        z-index: 2;
+    }
+}
+
+.penTooltip {
+    background-color: rgb(179, 179, 179);
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    margin-left: 130px;
+    margin-bottom: -1px;
+    z-index:3;
+}
+
+
+
+.dashBoardCont{
+    margin-left:270px ;
+    margin-top: 90px;
+}
