@@ -22,7 +22,7 @@ const Login = () => {
         try{
             await googleSignIn();
             if(user){
-                router.push('/projects/new');
+                router.push('/dashboard');
             }
         }catch(error){
             console.log(error)

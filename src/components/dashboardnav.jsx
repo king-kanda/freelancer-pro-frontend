@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styles from '@/styles/dashboard.module.scss'
 
 const Dashboardnav = ({user}) => {
+
   return (
     <>
         <nav className=" top-0 fixed w-full bg-dark-tertiary border-gray-200 text-white ">
@@ -26,10 +27,10 @@ const Dashboardnav = ({user}) => {
                 </button>
                 <div className='px-2'>
                     <h2 className='text-sm font-bold'>
-                        Name Of User
+                        {user.displayName  || "jambo Jambo" }
                     </h2>
                     <p className='text-sm '>
-                        email@emailuser.com
+                       {user.email || "Jambo@email.com"}
                     </p>
                 </div>
                 {/* Dropdown menu */}

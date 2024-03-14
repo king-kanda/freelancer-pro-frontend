@@ -24,8 +24,8 @@ const Page = () => {
 
     const [fullName, setFullName] = useState('');
     const [email, setEmail] = useState('');
-    const [phone, setPhone] = useState('');
-    const [currentRole, setCurrentRole] = useState('');
+    const [phoneNumber, setPhoneNumber] = useState('');
+    const [userType, setUserType] = useState('freelancer');
     const [street, setStreet] = useState('');
     const [city, setCity] = useState('');
     const [state, setState] = useState('');
@@ -40,16 +40,18 @@ const Page = () => {
         const formData = {
             fullName,
             email,
-            phone,
-            currentRole,
+            phoneNumber,
+            userType,
+
             street,
             city,
             state,
             zipCode,
         };
 
+        console.log(formData)
         try {
-            const response = await fetch('http://localhost:8080/api/update-user', {
+            const response = await fetch('http://localhost:8080/api/v1/users', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -60,7 +62,7 @@ const Page = () => {
             if (response.ok) {
                 console.log('User data submitted successfully');
                 // Handle success, e.g., show a success message to the user
-                router.push('/dashboard');
+                router.push('/projects/blank');
             } else {
                 console.error('Failed to submit user data');
                 // Handle failure, e.g., show an error message to the user
@@ -107,22 +109,14 @@ const Page = () => {
                                                 className="w-full"
                                             />
                                         </div>
-                                        <h5 className="user-name mt-3 font-bold text-xl text-center">
-                                            John Doe
+                                        <h5 className="user-name mt-3 font-bold text-white text-xl text-center">
+                                           {user.displayName}
                                         </h5>
                                         <h6 className="user-email text-gray-500 text-sm text-center">
                                             {user.email ?? 'example@gmail.com'}
                                         </h6>
                                     </div>
-                                    <div className="about m-5">
-                                        <h5 className='text-center text-green font-bold underline relative'>
-                                            About
-                                        </h5>
-                                        <p className='mt-5  text-sm text-gray-700'>
-                                            I'm Yuki. Full Stack Designer I enjoy creating user-centric,
-                                            delightful and human experiences.
-                                        </p>
-                                    </div>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -149,7 +143,7 @@ const Page = () => {
                                             type="text"
                                             className=" border border-gray-300 text-gray-900 text-sm rounded-lg   focus:outline-none focus:ring-green focus:ring-1 focus:border-green block w-4/5 p-2.5"
                                             id="fullName"
-                                            placeholder="Enter full name"
+                                            value={ fullName || user.displayName }
                                             onChange={(e) => setFullName(e.target.value)}
                                            
                                         />
@@ -172,15 +166,15 @@ const Page = () => {
                                             className=" border border-gray-900 text-gray-900 text-sm rounded-lg   focus:outline-none focus:ring-green focus:ring-1 focus:border-green block w-4/5 p-2.5"
                                             id="phone"
                                             placeholder="Enter phone number"
-                                            value={phone}
-                                            onChange={(e) => setPhone(e.target.value)}
+                                            value={phoneNumber}
+                                            onChange={(e) => setPhoneNumber(e.target.value)}
                                         />
                                     </div>
                                     <div className="mb-3">
                                         <label htmlFor="countries" className="block mb-2 text-sm font-medium text-white ">What's your current role</label>
                                         <select id="countries" className="border border-gray-300 text-gray-900 text-sm rounded-lg   focus:outline-none focus:ring-green focus:ring-1 focus:border-green block w-4/5 p-2.5"
-                                        value={currentRole}
-                                        onChange={(e) => setCurrentRole(e.target.value)}
+                                        // value={currentRole}
+                                        // onChange={(e) => setCurrentRole(e.target.value)}
                                         >
                                             <option value="">Choose your current role</option>
                                             <option value="manager">Manager </option>

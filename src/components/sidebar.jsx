@@ -3,7 +3,7 @@ import styles from '@/styles/dashboard.module.scss'
 import { useRouter } from 'next/navigation';
 import { LiaFileInvoiceDollarSolid } from "react-icons/lia";
 
-const page = () => {
+const page = ({logOut}) => {
 
     const router = useRouter();
     const handleSignOut = async () =>{
@@ -263,10 +263,8 @@ const page = () => {
                 </span>
                 </a>
             </li>
-            <li className='bg-green '>
+            <li className='bg-green '  onClick={handleSignOut}>
                 <a
-                href="#"
-                onClick={handleSignOut}
                 className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-800 text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-green pr-6"
                 >
                 <span className="inline-flex text-white justify-center items-center ml-4">
