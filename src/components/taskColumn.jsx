@@ -8,7 +8,7 @@ import { useDrag, useDrop } from 'react-dnd';
 import SidePanel from './tastSidePane';
 import { CiCircleMore } from "react-icons/ci";
 
-const TaskColumn = ({ tasks ,setTasks }) => {
+const TaskColumn = ({ projectId, tasks ,setTasks }) => {
 
  const [todos , setTodos] = useState([])
  const [inProgress , setInProgress] = useState([])
@@ -51,6 +51,7 @@ const TaskColumn = ({ tasks ,setTasks }) => {
                 todos = {todos}
                 inProgress = {inProgress}
                 closed = {closed}
+                projectId = {projectId}
               
               />
             ))}
@@ -66,7 +67,7 @@ export default TaskColumn;
 
 // clums
 
-const Columns = ({status, tasks ,setTasks, todos ,inProgress, closed}) =>{
+const Columns = ({status, tasks ,setTasks, todos ,inProgress, closed , projectId}) =>{
 
   let text ;
   let tasksToMap = todos;
@@ -131,6 +132,7 @@ const Columns = ({status, tasks ,setTasks, todos ,inProgress, closed}) =>{
             task={task}
             tasks={tasks}
             setTasks={setTasks}
+            projectId={projectId}
            
           />
         ))
@@ -144,7 +146,7 @@ const Columns = ({status, tasks ,setTasks, todos ,inProgress, closed}) =>{
 // card component goes in here
 
 
-const Card = ({tasks ,setTasks,task}) =>{
+const Card = ({tasks ,setTasks,task , projectId}) =>{
 
   const [sidePanelOpen , setSidePanelOpen] = useState(false)
 
@@ -167,16 +169,18 @@ const Card = ({tasks ,setTasks,task}) =>{
   console.log(isDragging)
 
 
-  const handleRemove = (id) =>{
-        console.log(id)
-
-        const ftasks = tasks.filter (t=> t.id !== id )
-        localStorage.setItem("tasks", JSON.stringify(ftasks))
-        setTasks(ftasks)
-
-        alert("task removed")
-        
-  }
+  const handleRemove = (id) => {
+    // Filter out the task to be removed
+    const updatedTasks = tasks.filter((t) => t.id !== id);
+    
+    // Update localStorage only with tasks for the current project
+    localStorage.setItem(`tasks_${projectId}`, JSON.stringify(updatedTasks));
+    
+    // Update state with the filtered tasks
+    setTasks(updatedTasks);
+  
+    alert("Task removed");
+  };
 
   return(
     <>
@@ -227,7 +231,7 @@ const Card = ({tasks ,setTasks,task}) =>{
             </div>
         </div>
       </div>
-      <SidePanel task={task.name} isOpen={sidePanelOpen} setClosed={handleSideClose} />
+      <SidePanel projectId={projectId} task={task.name} isOpen={sidePanelOpen} setClosed={handleSideClose} />
     </>
   );
 };

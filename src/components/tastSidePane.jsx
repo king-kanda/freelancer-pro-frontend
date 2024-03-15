@@ -28,7 +28,7 @@ const products = [
   // More products...
 ]
 
-export default function Example({isOpen, setClosed , task}) {
+export default function Example({isOpen, setClosed , task , projectId}) {
   const [open, setOpen] = useState(true)
 
   useEffect(()=>{
@@ -83,7 +83,7 @@ export default function Example({isOpen, setClosed , task}) {
                           <span className='mr-2'>
                           <CiStickyNote />
                           </span>
-                        Mark Complete
+                          Update task 
                         </button>
                         </Dialog.Title>
                         <div className="ml-3 flex h-7 items-center">
@@ -103,7 +103,7 @@ export default function Example({isOpen, setClosed , task}) {
                         <div className="flow-root">
                             <div className="protect-title mt-4">
                               <h1 className='py-2 font-bold text-white text-4xl'>
-                              logitask
+                               {task}
                               </h1>
                             </div>
 

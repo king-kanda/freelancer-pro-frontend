@@ -25,16 +25,73 @@ const Board = ({projectData}) => {
     setActiveTab(tabNumber);
   };
 
-  useEffect(() => {
-    // Set the project state when projectData prop changes
-    setProject(projectData);
+ 
+  useEffect(()=>{
+    const fetchData = async () =>{
+        try{
+            // Fetching project data from your API using the project name
+            const response = await fetch(` http://localhost:8080/api/v1/projects/${projectData}`);
+         
+            if (!response.ok) {
+                throw new Error('Failed to fetch project data');
+            }
+            const data = await response.json();
+            setProject(data);
+        }catch(error){
+            console.log("erorr fetching data:", error)
+        }
+    };
 
-    // You can also set tasks here based on projectData if needed
-    // For example: setTasks(projectData.tasks);
-  }, [projectData]);
 
-  console.log(project)
+    fetchData();
+},[projectData]);
 
+
+if (!project) {
+  return <div>
+    <div
+      role="status"
+      className="max-w-screen-lg p-4 h-screen space-y-4 border border-gray-200 divide-y divide-gray-200 rounded shadow animate-pulse dark:divide-gray-700 md:p-6 dark:border-gray-700 mx-16"
+    >
+      <div className="flex items-center justify-between">
+        <div>
+          <div className="h-2.5 bg-gray-300 rounded-full dark:bg-gray-600 w-24 mb-2.5" />
+          <div className="w-32 h-2 bg-gray-200 rounded-full dark:bg-gray-700" />
+        </div>
+        <div className="h-2.5 bg-gray-300 rounded-full dark:bg-gray-700 w-12" />
+      </div>
+      <div className="flex items-center justify-between pt-4">
+        <div>
+          <div className="h-2.5 bg-gray-300 rounded-full dark:bg-gray-600 w-24 mb-2.5" />
+          <div className="w-32 h-2 bg-gray-200 rounded-full dark:bg-gray-700" />
+        </div>
+        <div className="h-2.5 bg-gray-300 rounded-full dark:bg-gray-700 w-12" />
+      </div>
+      <div className="flex items-center justify-between pt-4">
+        <div>
+          <div className="h-2.5 bg-gray-300 rounded-full dark:bg-gray-600 w-24 mb-2.5" />
+          <div className="w-32 h-2 bg-gray-200 rounded-full dark:bg-gray-700" />
+        </div>
+        <div className="h-2.5 bg-gray-300 rounded-full dark:bg-gray-700 w-12" />
+      </div>
+      <div className="flex items-center justify-between pt-4">
+        <div>
+          <div className="h-2.5 bg-gray-300 rounded-full dark:bg-gray-600 w-24 mb-2.5" />
+          <div className="w-32 h-2 bg-gray-200 rounded-full dark:bg-gray-700" />
+        </div>
+        <div className="h-2.5 bg-gray-300 rounded-full dark:bg-gray-700 w-12" />
+      </div>
+      <div className="flex items-center justify-between pt-4">
+        <div>
+          <div className="h-2.5 bg-gray-300 rounded-full dark:bg-gray-600 w-24 mb-2.5" />
+          <div className="w-32 h-2 bg-gray-200 rounded-full dark:bg-gray-700" />
+        </div>
+        <div className="h-2.5 bg-gray-300 rounded-full dark:bg-gray-700 w-12" />
+      </div>
+      <span className="sr-only">Loading...</span>
+    </div>
+  </div>;
+}
   return (
     <>
       <section className='mb-2  mr-4'>
@@ -47,8 +104,8 @@ const Board = ({projectData}) => {
                 <span className='p-2 text-2xl bg-blue-200 text-purple-600 rounded mr-4'>
                   <FaChartPie />
                 </span>
-                <h2 className='text-sm'>
-                   {/* {project.projectName} */}
+                <h2 className='text-xl'>
+                   {project.projectName}
                 </h2>
                 <button className='mx-1 text-sm p-1 hover:bg-dark-tertiary hover:rounded-lg'>
                   <FaChevronDown />
@@ -185,7 +242,7 @@ const Board = ({projectData}) => {
               Board
             </button>
           </div>
-          <div className="tabBtnHolder mx-3 hover:border-b-2 border-white">
+          {/* <div className="tabBtnHolder mx-3 hover:border-b-2 border-white">
             <button 
             onClick={() => handleTabClick(3)}
             className='inline-flex items-center  text-sm text-gray-400' >
@@ -194,8 +251,8 @@ const Board = ({projectData}) => {
               </span>
               Calendar
             </button>
-          </div>
-          <div className="tabBtnHolder mx-3 hover:border-b-2 border-white">
+          </div> */}
+          {/* <div className="tabBtnHolder mx-3 hover:border-b-2 border-white">
             <button 
             onClick={() => handleTabClick(4)}
             className='inline-flex items-center  text-sm text-gray-400' >
@@ -204,7 +261,7 @@ const Board = ({projectData}) => {
               </span>
               Notes
             </button>
-          </div>
+          </div> */}
           <div className="tabBtnHolder mx-3 hover:border-b-2 border-white">
             <button 
             onClick={() => handleTabClick(5)}
@@ -225,9 +282,9 @@ const Board = ({projectData}) => {
       {/* the above buttons shoudld change and teigger the state of the view below basicllly these are going to be tabs , therese tabs are going to be created as separate compoents  which will be furthr be fed into this page , the default view will be the board tab */}
 
       {activeTab === 1 && <p>Hello This is project overview</p>}
-      {activeTab === 2 &&  <TaskBoard></TaskBoard>}
-      {activeTab === 3 && <p>Hello 4</p>}
-      {activeTab === 4 && <p>Hello 5 </p>}
+      {activeTab === 2 &&  <TaskBoard projectId={project._id} ></TaskBoard>}
+      {/* {activeTab === 3 && <p>Hello 4</p>} */}
+      {/* {activeTab === 4 && <p>Hello 5 </p>} */}
       {activeTab === 5 && (
           <DndProvider backend={HTML5Backend}>
             <FileDrop />

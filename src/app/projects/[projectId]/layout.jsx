@@ -125,7 +125,7 @@ const page = ({children}) => {
                         </li>
                         <li>
                             <a
-                            href="#"
+                            href="/dashboard"
                             className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-200 txte-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-green pr-6"
                             >
                             <span className="inline-flex justify-center items-center ml-4">
@@ -178,7 +178,7 @@ const page = ({children}) => {
                         </li>
                         <li>
                             <a
-                            href="#"
+                            href="/dashboard/finances"
                             className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-200 txte-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-green pr-6"
                             >
                             <span className="inline-flex justify-center items-center ml-4">
@@ -198,7 +198,7 @@ const page = ({children}) => {
                                 </svg>
                             </span>
                             <span className="ml-2 text-sm tracking-wide truncate">
-                                My Inbox
+                                My Finances
                             </span>
                             </a>
                         </li>
