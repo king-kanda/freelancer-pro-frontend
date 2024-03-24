@@ -5,7 +5,7 @@ import { FcGoogle } from "react-icons/fc";
 import { BsFacebook } from "react-icons/bs";
 import { IoIosMail } from "react-icons/io";
 import Link from 'next/link'
-import styles from './style.module.scss'
+import styles from '@/styles/style.module.scss'
 import { UserAuth } from '@/context/AuthContext';
 import { useRouter } from 'next/navigation';
 
