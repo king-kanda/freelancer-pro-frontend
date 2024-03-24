@@ -119,7 +119,7 @@ const Columns = ({status, tasks ,setTasks, todos ,inProgress, closed , projectId
       <div
       ref={drop}
       className="w-64 p-2">
-        <h2 className='text-white font-semibold mb-6 inline-flex items-center gap-6'>
+        <h2 className='text-black font-semibold mb-6 inline-flex items-center gap-6'>
           {text}
           <span className='text-sm font-light'>
             {tasksToMap.length}
@@ -186,19 +186,19 @@ const Card = ({tasks ,setTasks,task , projectId}) =>{
     <>
       <div 
       ref={drag} 
-      className="bg-dark-tertiary w-64 py-5 px-4 rounded border border-gray-700 mb-2 cursor-grab"
+      className="bg-gray-200 w-64 py-5 px-4 rounded border border-gray-400 mb-2 cursor-grab"
       
       >
         <div className="expand btn flex items-center justify-end">
           <button 
           onClick={handleClick}
           >
-            <span className='text-xl text-white'>
+            <span className='text-xl text-black'>
                <CiCircleMore />
             </span>
           </button>
         </div>
-        <p className='text-white text-sm inline-flex gap-2 items-center' >
+        <p className='text-black text-sm inline-flex gap-2 items-center' >
           <button>
             <CiCircleCheck />
           </button>
@@ -221,10 +221,10 @@ const Card = ({tasks ,setTasks,task , projectId}) =>{
               Feb 14-31
             </span>
           </div>
-            <div className="delete-btn text-sm h-6 w-6 bg-dark-primary p-1 flex items-center justify-center rounded-full">
+            <div className="delete-btn text-sm h-6 w-6 bg-gray-600 p-1 flex items-center justify-center rounded-full">
               <button 
               onClick={()=>handleRemove(task.id)}>
-                <span className='text-white  '>
+                <span className='text-black  '>
                   <IoTrashOutline />
                 </span>
               </button>

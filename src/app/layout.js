@@ -16,10 +16,7 @@ export default function RootLayout({ children }) {
   const router = useRouter();
 
   // Define an array of routes where you don't want to display the additional content
-  const excludedRoutes = ['/dashboard', '/accounts'];
 
-  // Check if the current route is not in the excludedRoutes array
-  const shouldDisplayContent = !excludedRoutes.includes(router.pathname);
 
   return (
     <html lang="en">

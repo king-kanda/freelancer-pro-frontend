@@ -7,10 +7,12 @@ import { GoTrophy } from "react-icons/go";
 import { Recents, StatusDonught } from '@/components';
 import { MdLocalPrintshop } from "react-icons/md";
 import { useReactToPrint } from 'react-to-print';
+import { UserAuth } from '@/context/AuthContext';
 
 
 const page = () => {
 
+    const { user } = UserAuth();
     const componentRef = useRef();
     const handlePrint = useReactToPrint({
         content: () => componentRef.current,
@@ -128,7 +130,7 @@ const page = () => {
             {/* graphs and stats */}
             <div className="grid grid-cols-2 gap-5 mx-12">
                 <div className="col-span-1 graph-area mx-6">
-                    <StatusDonught/>
+                    <StatusDonught user={user}/>
                 </div>
                 <div className="col-span-1 recents-area mx-6">
                 
@@ -138,7 +140,7 @@ const page = () => {
             </div>
             <div className="mx-12">
                     <div className="card-holder mx-6">
-                        <Recents/>
+                        {/* <Recents/> */}
                     </div>
             </div>  
 

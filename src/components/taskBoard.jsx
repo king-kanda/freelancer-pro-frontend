@@ -66,12 +66,12 @@ const TaskBoard = ({projectId}) => {
                 <input 
                   type="text"
                   placeholder='create task'
-                  className='text-white bg-dark-primary  px-2 py-2 rounded text-sm' 
+                  className='text-black bg-gray-200  px-2 py-2.5 rounded text-sm focus:outline-grean-100 placeholder-gray-700' 
                   value={task.name}
                   onChange={(e)=>setTask({...task,projectID:projectId,id:uuidv4(),name : e.target.value})}    
                   required         
                   />
-                    <button className='px-2 py-2.5 rounded bg-dark-tertiary'>
+                    <button className='px-2 py-2.5 rounded bg-green'>
                         <span className='text-white text-2xl'>
                           <CiCirclePlus />
                         </span>
@@ -79,7 +79,7 @@ const TaskBoard = ({projectId}) => {
                 </form>
                 </div>
                 <div className="tabBtnHolder mx-3">
-                  <button className='inline-flex items-center  text-sm text-gray-400' >
+                  <button className='inline-flex items-center  text-sm text-gray-900' >
                     <span className="mx-1">
                       <BsFilterRight />
                     </span>
@@ -87,7 +87,7 @@ const TaskBoard = ({projectId}) => {
                   </button>
                 </div>
                 <div className="tabBtnHolder mx-3 ">
-                  <button className='inline-flex items-center  text-sm text-gray-400' >
+                  <button className='inline-flex items-center  text-sm text-gray-900' >
                     <span className="mx-1">
                       <BsSortUp />
                     </span>

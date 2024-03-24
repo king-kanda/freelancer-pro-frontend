@@ -13,15 +13,9 @@ const Page = () => {
 
     console.log(user)
 
-    useEffect(()=>{
+    
 
-        if(!user){
-            router.push('/login');
-            console.log('wozzza')
-        }
-       
-    },[user , router])
-
+    const [freelanceId, setFreelanceId] = useState(user.uid)
     const [fullName, setFullName] = useState('');
     const [email, setEmail] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
@@ -31,6 +25,15 @@ const Page = () => {
     const [state, setState] = useState('');
     const [zipCode, setZipCode] = useState('');
    
+   useEffect(()=>{
+
+        if(!user){
+            router.push('/login');
+            console.log('wozzza')
+        }
+        setFreelanceId(user.uid)
+       
+    },[user , router])
 
 
     const handleSubmit = async (e) => {
@@ -38,6 +41,7 @@ const Page = () => {
         console.log("submit triggered")
         // Combine individual state variables into formData
         const formData = {
+            freelanceId,
             fullName,
             email,
             phoneNumber,

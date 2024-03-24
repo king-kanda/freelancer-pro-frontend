@@ -3,24 +3,27 @@ import React , {useState , useEffect}from 'react'
 import Link from 'next/link'
 
 
-const Projectlist = () => {
+const Projectlist = ({user}) => {
 
 const [projects , setProjects] = useState([]);
 
-useEffect(()=>{
-        const fetchData = async () => {
-            try {
-              const response = await fetch('http://localhost:8080/api/v1/projects');
-              const result = await response.json();
-              setProjects(result);
-            } catch (error) {
-              console.error('Error fetching data:', error);
-            }
-          };
-      
-          fetchData();
-      },[]);
-    
+
+useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // Ensure user is available and has an ID
+        if (user && user.uid) {
+          const response = await fetch(`http://localhost:8080/api/v1/projects?userId=${user.uid}`);
+          const result = await response.json();
+          setProjects(result);
+        }
+        } catch (error) {
+            console.error('Error fetching invoice data:', error);
+        }  
+    };
+
+    fetchData();
+  }, [user]);
 console.log(projects)
 
 const getRandomColor = () => {

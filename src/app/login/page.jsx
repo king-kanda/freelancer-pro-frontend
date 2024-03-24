@@ -147,14 +147,7 @@ const Login = () => {
                                   <span className="loginIcons mx-2"><FcGoogle /> </span> Continue With Google
                                </p> 
                             </button>
-                            <button
-                                type="submit"
-                                className="w-full border border-black  font-medium rounded-full text-sm mt-2 px-5 py-2.5 focus:outline-none"
-                            >
-                               <p className="inline-flex items-center justify-between">
-                                  <span className="loginIcons mx-2"> <BsFacebook /> </span> Continue With Facebook
-                               </p> 
-                            </button>
+                           
                          </div>
                          {/* dont have an account */}
                          <div className="signUp m-4">

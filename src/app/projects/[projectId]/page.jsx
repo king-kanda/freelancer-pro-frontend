@@ -4,19 +4,18 @@ import React, { useState , useEffect } from 'react';
 import styles from '@/styles/projects.module.scss'
 import { ProjectBoard } from '@/components';
 import { useRouter } from 'next/navigation';
+import { UserAuth } from '@/context/AuthContext';
 
 
 
 const Page = ( {params:{projectId}} ) => {
  
-    const router = useRouter();
-    const [projectData , setProjectData] = useState(null);
-
+    const { user , logOut } = UserAuth() 
  
     return (
         <>
             <div className={`${styles.dashBoardCont}`}>
-                <ProjectBoard projectData={projectId}/>
+                <ProjectBoard projectData={projectId} />
             </div>
         </>
     )

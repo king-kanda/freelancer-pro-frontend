@@ -8,13 +8,18 @@ import Image from 'next/image'
 import { useRouter } from 'next/navigation';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css'; // Import CSS
+import { UserAuth } from '@/context/AuthContext'; 
 
 
 const Page = () => {
+
+
+    const { user } = UserAuth() 
     const router = useRouter();
+    const [loading, setLoading] = useState(true); // Add loading state
+    const [freelanceId , setFreelanceId] = useState ();
     const [projectName , setProjectName] = useState();
     const [projectDesc , setProjectDesc] = useState();
-    const [clientID , setClientID] = useState();
     const [start_date, setStart_date] = useState(new Date());
     const [end_date, setEnd_date] = useState(new Date());
     const [budget , setBudget] = useState()
@@ -22,8 +27,16 @@ const Page = () => {
     const [error, setError] = useState('');
     const [descErr, setDescErr] = useState('');
     const [idError, setIdErr] = useState('');
-   
- 
+
+    useEffect(() => {
+        // Check if user data is loaded
+        if (user) {
+            setLoading(false); // Once user data is loaded, set loading to false
+            setFreelanceId(user.uid)
+            console.log(user.uid);
+        }
+    }, [user]);
+
     const handleNameBlur = () => {
         setError(
             !projectName
@@ -50,8 +63,8 @@ const Page = () => {
 
       const handleClientIdBlur = (e) => {
         setIdErr(
-            !clientID
-              ? 'Project Name is Required !!'
+            !budget
+              ? 'Project Budget is Required !!'
               : ''
           );
        
@@ -63,6 +76,7 @@ const Page = () => {
             console.log("submit triggered")
             // Combine individual state variables into formData
             const formData = {
+                freelanceId,
                 projectName,
                 projectDesc,
                 // clientID,
@@ -96,17 +110,40 @@ const Page = () => {
 
     return (
         <>
-            <section className={` ${styles.newBlank} bg-dark-primary px-5`}>
+             {loading ? ( // Display loading screen while data is being fetched
+                <div>
+                    <div className="flex items-center justify-center w-full h-screen">
+                        <div className="flex justify-center items-center space-x-1 text-sm text-gray-700">
+                            <svg
+                            fill="none"
+                            className="w-10 h-10 animate-spin"
+                            viewBox="0 0 32 32"
+                            xmlns="http://www.w3.org/2000/svg"
+                            >
+                            <path
+                                clipRule="evenodd"
+                                d="M15.165 8.53a.5.5 0 01-.404.58A7 7 0 1023 16a.5.5 0 011 0 8 8 0 11-9.416-7.874.5.5 0 01.58.404z"
+                                fill="currentColor"
+                                fillRule="evenodd"
+                            />
+                            </svg>
+                            <br />
+                            <div><p className='text-xl text-green'>Loading ...</p></div>
+                        </div>
+                    </div>
+                </div>
+            ) : (
+                <section className={` ${styles.newBlank} bg-gray-100 px-5`}>
                 <div className="section-nav p-4 flex items-center justify-between" >
                     <div className="back">
                        <Link href="/projects/new">
-                            <span className='text-white text-2xl'>
+                            <span className='text-black text-2xl'>
                                 <IoIosArrowRoundBack />
                             </span>
                        </Link>
                     </div>
                     <div className="cancel  text-xl">
-                        <span className='text-white'>
+                        <span className='text-black'>
                             <IoMdClose />
                         </span>
                     </div>
@@ -115,7 +152,7 @@ const Page = () => {
                     <div className="grid grid-cols-3 gap-3">
                         <div className="section col-span-1  px-5 p-3">
                             <div className="section-tt">
-                                <h2 className='text-white font-bold text-2xl'>
+                                <h2 className='text-black font-bold text-2xl'>
                                     New Project
                                 </h2>
                             </div>
@@ -123,64 +160,52 @@ const Page = () => {
                                 <form action="" className={` ${styles.projectForm} `}>
 
                                     <div className="project-name">
-                                        <div class={`mb-5 ${styles.projectForm}`}>
-                                            <label for="base-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Project Name</label>
+                                        <div className={`mb-5 ${styles.projectForm}`}>
+                                            <label htmlFor="base-input" className="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Project Name</label>
                                             <input 
                                             type="text" 
                                             id="project-name" 
                                             value={projectName}
                                             onChange={(e)=>setProjectName(e.target.value)}
                                             onBlur={handleNameBlur}
-                                            class="bg-dark-secondary border border-green-300 text-white text-sm rounded focus:ring-grean-500 focus:border-green block w-full p-2.5" 
+                                            className="bg-gray-200 border border-gray-400 text-black text-sm rounded focus:ring-grean-500 focus:border-green block w-full p-2.5" 
                                             
                                             />
                                             {error && <span className='py-2 text-red-500'>{error}</span>}
                                         </div>
                                     </div>
                                     <div className="project-name">
-                                        <div class={`mb-3 ${styles.projectForm}`}>
-                                            <label for="base-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Project Description </label>
+                                        <div className={`mb-3 ${styles.projectForm}`}>
+                                            <label htmlFor="base-input" className="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Project Description </label>
                                             <input 
                                             type="text" 
                                             id="project-name" 
                                             value={projectDesc}
                                             onChange={(e)=>setProjectDesc(e.target.value)}
                                             onBlur={handleDescBlur}
-                                            class="bg-dark-secondary border border-green-300 text-white text-sm rounded focus:ring-grean-500 focus:border-green block w-full p-2.5"
+                                            className="bg-gray-200 border border-gray-400 text-black text-sm rounded focus:ring-grean-500 focus:border-green block w-full p-2.5"
                                             
                                             />
                                             {descErr && <span className='py-2 text-red-500'>{descErr}</span>}
                                         </div>
                                     </div>
+                                   
                                     <div className="project-name">
-                                        <div class={`mb-5 ${styles.projectForm}`}>
-                                            <label for="base-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Project Client ID </label>
-                                            <input 
-                                            type="text" 
-                                            id="project-name" 
-                                            value={clientID}
-                                            onChange={(e)=>setClientID(e.target.value)}
-                                            onBlur={handleClientIdBlur}
-                                            class="bg-dark-secondary border border-green-300 text-white text-sm rounded focus:ring-grean-500 focus:border-green block w-full p-2.5" />
-                                             {idError && <span className='py-2 text-red-500'>{idError}</span>}
-                                        </div>
-                                    </div>
-                                    <div className="project-name">
-                                        <div class={`mb-5 ${styles.projectForm}`}>
-                                            <label for="base-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Project Budget </label>
+                                        <div className={`mb-5 ${styles.projectForm}`}>
+                                            <label htmlFor="base-input" className="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Project Budget </label>
                                             <input 
                                             type="text" 
                                             id="project-name" 
                                             value={budget}
                                             onChange={(e)=>setBudget(e.target.value)}
                                             onBlur={handleClientIdBlur}
-                                            class="bg-dark-secondary border border-green-300 text-white text-sm rounded focus:ring-grean-500 focus:border-green block w-full p-2.5" />
-                                             {idError && <span className='py-2 text-red-500'>{idError}</span>}
+                                            className="bg-gray-200 border border-gray-400 text-black text-sm rounded focus:ring-grean-500 focus:border-green block w-full p-2.5" />
+                                               {idError && <span className='py-2 text-red-500'>{idError}</span>}
                                         </div>
                                     </div>
                                     <div className="project-date-picker">
                                     <div className={`mb-4 ${styles.projectForm}`}>
-                                            <label htmlFor="base-input" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Project Timeline</label>
+                                            <label htmlhtmlFor="base-input" className="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Project Timeline</label>
                                             <div className="flex items-center">
                                             <div className="relative max-w-sm">
                                                 <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
@@ -194,7 +219,7 @@ const Page = () => {
                                                 selectsStart
                                                 startDate={start_date}
                                                 endDate={end_date}
-                                                className="bg-dark-secondary border border-gray-300 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5"
+                                                className="bg-gray-200 border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5"
                                                 placeholderText="Select Start"
                                                 />
                                             </div>
@@ -212,7 +237,7 @@ const Page = () => {
                                                 startDate={start_date}
                                                 endDate={end_date}
                                                 minDate={start_date}
-                                                className="bg-dark-secondary border border-gray-300 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5"
+                                                className="bg-gray-200 border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5"
                                                 placeholderText="Select Deadline"
                                                 />
                                             </div>
@@ -223,7 +248,7 @@ const Page = () => {
                                    <div className="form-btn mt-5">
                                     <button 
                                     onClick={handleSubmit}
-                                    type="submit" className="w-full text-white text-sm border border-gray-600 rounded py-2 hover:bg-green hover:font-bold">
+                                    type="submit" className="w-full text-black text-sm border border-gray-600 rounded py-2 hover:bg-green hover:font-bold">
                                         Create Project.
                                     </button>
                                    </div>
@@ -238,11 +263,14 @@ const Page = () => {
                                 height={540}
                                 alt="Picture of the author"
                                 className={` rounded-lg `}
+                                priority={false}
                             />
                         </div>
                     </div>
                 </div>
             </section>
+            )}
+            
         </>
     )
 }

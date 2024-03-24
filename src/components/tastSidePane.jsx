@@ -59,7 +59,7 @@ export default function Example({isOpen, setClosed , task , projectId}) {
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
+          <div className="fixed inset-0 bg-gray-300 bg-opacity-75 transition-opacity" />
         </Transition.Child>
 
         <div className="fixed inset-0 overflow-hidden">
@@ -75,11 +75,11 @@ export default function Example({isOpen, setClosed , task , projectId}) {
                 leaveTo="translate-x-full"
               >
                 <Dialog.Panel className="pointer-events-auto w-screen max-w-screen-md">
-                  <div className="flex h-full flex-col overflow-y-scroll bg-dark-tertiary shadow-xl">
+                  <div className="flex h-full flex-col overflow-y-scroll bg-white shadow-xl">
                     <div className="flex-1 overflow-y-auto px-4 py-6 sm:px-6">
                       <div className="flex items-start justify-between">
-                        <Dialog.Title className="text-lg font-medium text-white">
-                        <button type="button" class="px-3 py-2 text-xs font-medium text-center inline-flex items-center text-white bg-grean-700 rounded-lg ">
+                        <Dialog.Title className="text-lg font-medium text-black">
+                        <button type="button" class="px-6 py-3 text-xs font-medium text-center inline-flex items-center text-white bg-grean-700 rounded-lg ">
                           <span className='mr-2'>
                           <CiStickyNote />
                           </span>
@@ -89,7 +89,7 @@ export default function Example({isOpen, setClosed , task , projectId}) {
                         <div className="ml-3 flex h-7 items-center">
                           <button
                             type="button"
-                            className="relative -m-2 p-2 text-white hover:text-gray-500"
+                            className="relative -m-2 p-2 text-black hover:text-gray-500"
                             onClick={() => handleClose(false)}
                           >
                             <span className="absolute -inset-0.5" />
@@ -102,7 +102,7 @@ export default function Example({isOpen, setClosed , task , projectId}) {
                       <div className="mt-8">
                         <div className="flow-root">
                             <div className="protect-title mt-4">
-                              <h1 className='py-2 font-bold text-white text-4xl'>
+                              <h1 className='py-2 font-bold text-black text-4xl'>
                                {task}
                               </h1>
                             </div>
@@ -110,11 +110,11 @@ export default function Example({isOpen, setClosed , task , projectId}) {
                             <div className="task-details mt-3">
                               <div className="flex items-center justify-start">
                                 <div className="label">
-                                  <p className='text-gray-300'>
+                                  <p className='text-gray-700'>
                                     Assignee
                                   </p>
                                 </div>
-                                <div className="detail-container ml-6 text-white">
+                                <div className="detail-container ml-6 text-black">
                                     <div className="inline-flex items-center justify-start">
                                       <span className="border h-8 w-8 border-dashed border-white p-2 rounded-full flex items-center justify-center text-xl">
                                       <CiUser />
@@ -130,11 +130,11 @@ export default function Example({isOpen, setClosed , task , projectId}) {
                             <div className="task-details my-4">
                               <div className="flex items-center justify-start">
                                 <div className="label">
-                                  <p className='text-gray-300'>
+                                  <p className='text-gray-700'>
                                     Due Date
                                   </p>
                                 </div>
-                                <div className="detail-container ml-6 text-white ">
+                                <div className="detail-container ml-6 text-black ">
                                     <div className="inline-flex items-center justify-start">
                                     <span className="border h-8 w-8 border-dashed border-white p-2 rounded-full flex items-center justify-center text-xl">
                                     <CiCalendar />
@@ -150,11 +150,11 @@ export default function Example({isOpen, setClosed , task , projectId}) {
                             <div className="task-details my-4">
                               <div className="flex items-center justify-start">
                                 <div className="label">
-                                  <p className='text-gray-300'>
+                                  <p className='text-gray-700'>
                                     Priority . .
                                   </p>
                                 </div>
-                                <div className="detail-container ml-6 text-white ">
+                                <div className="detail-container ml-6 text-black ">
                                     <div className="inline-flex items-center justify-start">
                                     <span className="border h-8 w-8 border-dashed border-white p-2 rounded-full flex items-center justify-center text-xl">
                                     <CiWarning />
@@ -170,16 +170,16 @@ export default function Example({isOpen, setClosed , task , projectId}) {
 
                             {/* project descrption section */}
                             <form>
-                              <div className="w-full mb-4 border border-gray-200 rounded-lg bg-gray-500 dark:bg-gray-700 dark:border-gray-600">
+                              <div className="w-full mb-4 border border-gray-500 rounded-lg bg-gray-400 dark:bg-gray-700 ">
                               
-                                <div className="px-4 py-2 bg-white rounded-b-lg dark:bg-gray-800">
+                                <div className="px-4 py-2 bg-white rounded-b-lg">
                                   <label htmlFor="editor" className="sr-only">
                                     Publish post
                                   </label>
                                   <textarea
                                     id="editor"
                                     rows={8}
-                                    className="block w-full px-0 text-sm text-gray-800 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400"
+                                    className="block w-full px-0 text-sm text-gray-800 bg-white border-0  focus:ring-0 focus:outline-none"
                                     placeholder="Write task description..."
                                     required=""
                                     defaultValue={""}

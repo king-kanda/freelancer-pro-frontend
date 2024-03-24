@@ -3,32 +3,19 @@ import React , {useState , useEffect}from 'react'
 import styles from '@/styles/dashboard.module.scss'
 import { CiBellOn } from "react-icons/ci";
 import { ProjectList } from '@/components';
+import { UserAuth } from '@/context/AuthContext'
+import Link from 'next/link'
 
 const page = ({children}) => {
 
-  const [projects , setProjects] = useState([]);
+const { user , logOut } = UserAuth() 
 
-  useEffect(()=>{
-    const fetchData = async () => {
-        try {
-          const response = await fetch('http://localhost:8080/api/v1/projects');
-          const result = await response.json();
-          setProjects(result);
-        } catch (error) {
-          console.error('Error fetching data:', error);
-        }
-      };
-  
-      fetchData();
-  },[]);
-
-  console.log(projects)
 
   return (
     <>
     {/* component */}
-        <div className='bg-dark-secondary'>
-            <nav className=" top-0 fixed w-full bg-dark-tertiary text-white border-gray-200 ">
+        <div className='bg-white'>
+            <nav className=" top-0 fixed w-full bg-gray-100 text-black border-gray-200 ">
                     <div className=" flex items-center justify-end px-12 py-2.5">
                         
                         <div className="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
@@ -54,67 +41,19 @@ const page = ({children}) => {
                            </span>
                             
                         </div>
-                        {/* Dropdown menu */}
-                        <div
-                            className="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600"
-                            id="user-dropdown"
-                        >
-                            <div className="px-4 py-3">
-                            <span className="block text-sm text-gray-900 dark:text-white">
-                                Bonnie Green
-                            </span>
-                            <span className="block text-sm  text-gray-500 truncate dark:text-gray-400">
-                                name@flowbite.com
-                            </span>
-                            </div>
-                            <ul className="py-2" aria-labelledby="user-menu-button">
-                            <li>
-                                <a
-                                href="#"
-                                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                                >
-                                Dashboard
-                                </a>
-                            </li>
-                            <li>
-                                <a
-                                href="#"
-                                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                                >
-                                Settings
-                                </a>
-                            </li>
-                            <li>
-                                <a
-                                href="#"
-                                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                                >
-                                Earnings
-                                </a>
-                            </li>
-                            <li>
-                                <a
-                                href="#"
-                                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                                >
-                                Sign out
-                                </a>
-                            </li>
-                            </ul>
-                        </div>
-                        {/* not important foir now */}
+                      
                         </div>
                     
                     </div>
             </nav>
-            <div className={`  flex flex-col flex-auto flex-shrink-0 antisaliased  text-white `}>
+            <div className={`  flex flex-col flex-auto flex-shrink-0 antisaliased  text-black `}>
                 <div className="fixed flex flex-col top-0 left-0 w-64  h-full">
                 {/* <div className="flex items-center justify-center p-6 ">
                     <div>
                         <img className={` ${styles.Logo} `} src="/logo.png" alt="dashbaordlogo" />
                     </div>
                 </div> */}
-                <div className={`${styles.scroll} overflow-y-auto overflow-x-hidden flex-grow bg-dark-tertiary`}>
+                <div className={`${styles.scroll} overflow-y-auto overflow-x-hidden flex-grow bg-gray-100`}>
                     <ul className="flex flex-col py-4 ">
                         <li className="px-5">
                             <div className="flex flex-row items-center h-8">
@@ -124,9 +63,10 @@ const page = ({children}) => {
                             </div>
                         </li>
                         <li>
-                            <a
+                            <Link
+                            prefetch={true}
                             href="/dashboard"
-                            className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-200 txte-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-green pr-6"
+                            className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-200 text-black  border-l-4 border-transparent hover:border-green pr-6"
                             >
                             <span className="inline-flex justify-center items-center ml-4">
                                 <svg
@@ -147,12 +87,13 @@ const page = ({children}) => {
                             <span className="ml-2 text-sm tracking-wide truncate">
                                 Dashboard
                             </span>
-                            </a>
+                            </Link>
                         </li>
                         <li>
-                            <a
-                            href="#"
-                            className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-200 txte-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-green pr-6"
+                            <Link
+                              prefetch={true}
+                            href="/dashboard/clients"
+                            className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-200 text-black  border-l-4 border-transparent hover:border-green pr-6"
                             >
                             <span className="inline-flex justify-center items-center ml-4">
                                 <svg
@@ -170,16 +111,17 @@ const page = ({children}) => {
                                 />
                                 </svg>
                             </span>
-                            <span className="ml-2 text-sm tracking-wide truncate">My Tasks</span>
-                            <span className="px-2 py-0.5 ml-auto text-xs font-medium tracking-wide text-indigo-500 bg-indigo-50 rounded-full">
+                            <span className="ml-2 text-sm tracking-wide truncate">My Clients</span>
+                            <span className="px-2 py-0.5 ml-auto text-xs font-medium tracking-wide text-white bg-green rounded-full">
                                 New
                             </span>
-                            </a>
+                            </Link>
                         </li>
                         <li>
-                            <a
-                            href="/dashboard/finances"
-                            className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-200 txte-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-green pr-6"
+                            <Link
+                              prefetch={true}
+                            href="/dashboard/invoices"
+                            className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-200 text-black  border-l-4 border-transparent hover:border-green pr-6"
                             >
                             <span className="inline-flex justify-center items-center ml-4">
                                 <svg
@@ -198,12 +140,12 @@ const page = ({children}) => {
                                 </svg>
                             </span>
                             <span className="ml-2 text-sm tracking-wide truncate">
-                                My Finances
+                                My Invoices
                             </span>
-                            </a>
+                            </Link>
                         </li>
                         
-                        <ProjectList/>
+                        <ProjectList  user={user} />
                     </ul>
                 </div>
                 </div>

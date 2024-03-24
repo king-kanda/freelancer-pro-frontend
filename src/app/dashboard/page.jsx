@@ -8,10 +8,13 @@ import { VscProject } from "react-icons/vsc";
 import { FaUsers } from "react-icons/fa";
 import Link from 'next/link'
 import { FaArrowRightLong } from "react-icons/fa6";
-import { DashProjects } from '@/components';
+import { DashClients, DashProjects, StatusBar, StatusDonught } from '@/components';
+import { UserAuth } from '@/context/AuthContext';
 
 
 const Page = () => {
+
+    const { user  } = UserAuth() 
 
     const currentDate = new Date();
 
@@ -35,9 +38,9 @@ const Page = () => {
                 <div className={` ${styles.heroSec}  `}>
                     <div className="flex items-center justify-center">
                            <div className="py-6">
-                                <p className="time-greeting text-white text-center">{formattedDate}</p>
+                                <p className="time-greeting text-black text-center">{formattedDate}</p>
                                 <br />
-                                <h1 className={` text-3xl font-bold text-white text-center`}>
+                                <h1 className={` text-3xl font-bold text-black text-center`}>
                                     {greeting} ,Okanda.
                                 </h1>
                            </div>
@@ -48,7 +51,7 @@ const Page = () => {
 
                             <div className={` ${styles.gridPanel} bg-yellow-200 p-6 rounded-lg`}>
                             <div className="my -3">
-                                <div className={`${styles.iconHolder} bg-yellow-400 text-white my-2 flex items-center justify-center`}>  
+                                <div className={`${styles.iconHolder} bg-yellow-400 text-black my-2 flex items-center justify-center`}>  
                                     <span>
                                         <FaFileInvoiceDollar />
                                     </span>
@@ -75,7 +78,7 @@ const Page = () => {
                             
                             <div className={` ${styles.gridPanel} bg-grean-200 p-6 rounded-lg`}>
                             <div className="my -3">
-                                <div className={`${styles.iconHolder} bg-grean-400 text-white my-2 flex items-center justify-center`}>  
+                                <div className={`${styles.iconHolder} bg-grean-400 text-black my-2 flex items-center justify-center`}>  
                                     <span>
                                         <VscProject />
                                     </span>
@@ -88,21 +91,14 @@ const Page = () => {
                                             4 projects require your attention for updates.
                                             Keep your projects on track by providing necessary updates.
                                     </p>
-                                    <p className={` text-xs inline-flex items-center`}>
-                                        Go to Projects
-                                        <Link href="#">
-                                        <span>
-                                        <FaArrowRightLong  />
-                                        </span>
-                                        </Link>
-                                    </p>
+                                   
                                 </div>
                                 </div>
                             </div>
 
                             <div className={` ${styles.gridPanel} bg-purple-200 p-6 rounded-lg`}>
                                 <div className="mx -3">
-                                <div className={`${styles.iconHolder} bg-purple-400 text-white my-2 flex items-center justify-center`}>  
+                                <div className={`${styles.iconHolder} bg-purple-400 text-black my-2 flex items-center justify-center`}>  
                                     <span>
                                         <FaUsers />
                                     </span>
@@ -134,21 +130,22 @@ const Page = () => {
                 {/* bring in the othe rcomponents  */}
                 {/* grid fro all project and invoices pendingf */}
                 <div className="grid grid-cols-2 gap-6 mx-12 mt-8 ">
-                    <div className="projects  list border border-gray-100 rounded-lg p-4 max-h-[500px]">
-                        <DashProjects/>
+                    <div className="projects  list border border-gray-400 rounded-lg p-4">
+                       <StatusBar user={user}/>
                     </div>
-                    <div className="invoices-list border border-gray-100 rounded-lg p-4 max-h-[500px] ">
-
+                    <div className="iprojects list border border-gray-400 rounded-lg p-4 overflow-y-auto max-h-[500px] ">
+                        <DashProjects user={user} />
                     </div>
                 </div>
                 <div className="grid grid-cols-2 gap-6 mx-12 mt-8 ">
-                    <div className="projects  list border border-gray-700 rounded-lg p-4 max-h-[500px]">
-                        <DashProjects/>
+                    <div className="projects list border border-gray-400 rounded-lg p-4 overflow-y-auto max-h-[500px]">
+                        <StatusDonught/>
                     </div>
-                    <div className="invoices-list border border-gray-100 rounded-lg p-4 max-h-[500px] ">
-
+                    <div className="projects list border border-gray-400 rounded-lg p-4 overflow-y-auto max-h-[500px]">
+                           <DashClients user={user}/>
                     </div>
                 </div>
+                
         </>
     )
 }
